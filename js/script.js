@@ -13,14 +13,17 @@ myCarouselElement.addEventListener('slide.bs.carousel', () => {
       })
   })
 
+  //Función que se ejecuta teniendo en cuenta el tamaño del documento del usuario
   function changeDocument () {
-    if(window.screen.width < 992){
+    if(document.documentElement.clientWidth < 992){
+        //Se les agrega una clase que quita la visualización del elemento en la pagina
         myCarouselElement.classList.add("invisibility");
         title.classList.add("invisibility");
         menuOption.classList.add("invisibility");
         search.classList.add("invisibility");
         buttonSearch.classList.add("invisibility");
 
+        //Se agrega un menu desplegable en la barra de navegación
         newOptionNavbar. innerHTML = `
             <p class="d-inline-flex gap-1">
                 <a class="nav-link" data-bs-toggle="collapse" href="#multiCollapseExample1" role="button" aria-expanded="false" aria-controls="multiCollapseExample1">Opciones</a>
@@ -41,13 +44,23 @@ myCarouselElement.addEventListener('slide.bs.carousel', () => {
             </div>
         <a class="nav-link d-inline-flex gap-1" id="opciones"></a>
         `
-  } else {
-    myCarouselElement.classList.remove("invisibility");
+    };
+  };
+
+  //Función para remover la clase invisible y devuelve el contenido al documento, se elimina el menu desplegable de la barra de navegación
+  function removeChange() {
+    if (document.documentElement.clientWidth > 992) {
+        myCarouselElement.classList.remove("invisibility");
         title.classList.remove("invisibility");
         menuOption.classList.remove("invisibility");
         search.classList.remove("invisibility");
         buttonSearch.classList.remove("invisibility");
-        };
-  };
+        newOptionNavbar.innerHTML = ``;
+    }
+  }
 
-  window.addEventListener("resize", changeDocument)
+  //Evento que detecta un cambio en el tamaño de ventana y ejecuta las funciones
+  window.addEventListener("resize", () => {
+    changeDocument()
+    removeChange()
+  })
