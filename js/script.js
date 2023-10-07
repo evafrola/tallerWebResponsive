@@ -13,9 +13,7 @@ myCarouselElement.addEventListener('slide.bs.carousel', () => {
       })
   })
 
-  //Seleccionar elemento del nav para ocultar información de la pagina
-
-window.addEventListener("DOMContentLoaded", () => {
+  function changeDocument () {
     if(window.screen.width < 992){
         myCarouselElement.classList.add("invisibility");
         title.classList.add("invisibility");
@@ -30,7 +28,7 @@ window.addEventListener("DOMContentLoaded", () => {
             <div class="row">
                 <div class="col">
                     <div class="collapse multi-collapse" id="multiCollapseExample1">
-                        <div class="card card-body">
+                        <div class="card card-body w-75">
                             <ul class="list-group">
                             <li class="list-group-item"><a href="#">Opción 1</a></li>
                             <li class="list-group-item"><a href="#">Opción 2</a></li>
@@ -43,16 +41,13 @@ window.addEventListener("DOMContentLoaded", () => {
             </div>
         <a class="nav-link d-inline-flex gap-1" id="opciones"></a>
         `
-    }
-
-    if (window.screen.width > 992) {
-        myCarouselElement.classList.remove("invisibility");
+  } else {
+    myCarouselElement.classList.remove("invisibility");
         title.classList.remove("invisibility");
         menuOption.classList.remove("invisibility");
         search.classList.remove("invisibility");
         buttonSearch.classList.remove("invisibility");
-        
-    }
-})
- 
-  
+        };
+  };
+
+  window.addEventListener("resize", changeDocument)
